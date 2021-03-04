@@ -67,7 +67,7 @@ const Main = {
 //普通写法
 render('body', Main)
 
-//路由写法  需要加载jquery.hashchange 见示例
+//路由写法
 renderPage('body', {
 	'/': Main
 })

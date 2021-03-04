@@ -2,7 +2,9 @@ $(function(){
 	$(window).bind('hashchange', hashChangeFire)
 })
 
+var hashRouter = false
 function hashChangeFire(){
+	if(hashRouter == false) return
 	var page = getHashPage()
 	if(page === null) return
 	renderPage(page)
@@ -14,11 +16,12 @@ function getHashPage(){
 	return matchs ? '/' + (matchs[2] || '') : matchs
 }
 
-var el, routers
+var el, routers = {}
 function renderPage(){
 	if(arguments.length == 2){
 		el = arguments[0]
 		routers = arguments[1]
+		hashRouter = true
 	}
 	var page = arguments.length == 2 ? (getHashPage() || '/') : arguments[0]
 	render(el, routers[page])
