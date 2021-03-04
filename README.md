@@ -8,8 +8,11 @@
 
 使用时，完完全全是 jQuery 的基本操作，对于已经会用 jq 的人来说，学习成本接近零。
 
-## 例子
+## 支持路由
 
+见下面例子
+
+## 例子
 
 ```
 const HelloWord = {
@@ -61,5 +64,13 @@ const Main = {
   }
 }
 
+//普通写法
 render('body', Main)
+
+//路由写法  需要加载jquery.hashchange 见示例
+renderPage('body', {
+	'/': Main
+})
+
+如何跳转? href="#!/"
 ```

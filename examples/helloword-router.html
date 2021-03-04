@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<title>Hello World -- jquery.template.js</title>
 		<script src="https://unpkg.com/jquery"></script>
+		<script src="https://unpkg.com/jquery-hashchange@2.0.0/jquery.ba-hashchange.js"></script>
 	</head>
 	<body>
 		<script>
@@ -81,6 +82,14 @@
 									alert('hello word')
 								}
 							}
+						},
+						{
+							el: createElement('a').attr('href', '#!/'),
+							childers: [
+								{
+									el: createElement('span').text('点我返回')
+								}
+							]
 						}
 					]
 				}
@@ -115,12 +124,23 @@
 									}
 								}
 							]
+						},
+						{
+							el: createElement('a').attr('href', '#!/hello'),
+							childers: [
+								{
+									el: createElement('span').text('点我跳转')
+								}
+							]
 						}
 					]
 				}
 			}
 
-			render('body', Main)
+			renderPage('body', {
+				'/': Main,
+				'/hello': HelloWord
+			})
 		</script>
 	</body>
 </html>
