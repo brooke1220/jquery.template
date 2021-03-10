@@ -8,11 +8,18 @@
 
 使用时，完完全全是 jQuery 的基本操作，对于已经会用 jq 的人来说，学习成本接近零。
 
+## 2.0版本
+> 2.0版本是因为作者习惯vue写法而进行迭代的
+
+2.0完全类vue开发模式 但是底层还是jq
+
 ## 支持路由
 
 见下面例子
 
 ## 例子
+
+#### 普通写法(无路由)
 
 ```
 const HelloWord = {
@@ -64,13 +71,55 @@ const Main = {
   }
 }
 
-//普通写法
-render('body', Main)
-
-//路由写法
-renderPage('body', {
-	'/': Main
+var app = new JqueryTemplate({
+	render: function(h){
+		return h(Main)
+	}
 })
 
-如何跳转? href="#!/"
+app.$mount('body')
+
+```
+
+#### 路由写法
+> 如何跳转? href="#!/"
+
+```
+const HelloWord1 = {
+	view: function(){
+		//如果需要获取当前路由信息 this.router.getCurrentPage() 即可
+		
+		return [
+			{
+				el: createElement('span').attr({class: 'hello-word'}).text('我是hello-word-1'),
+				events: {
+					click: function(){
+						alert('hello word')
+					}
+				}
+			},
+			{
+				el: createElement('a').attr('href', '#!/'),
+				childers: [
+					{
+						el: createElement('span').text('点我去hello')
+					}
+				]
+			}
+		]
+	}
+}
+
+var app = new JqueryTemplate({
+	render: function(h){
+		return h(Main)
+	},
+	routers: {
+		'/': HelloWord,
+		'/hello': HelloWord1
+	}
+})
+
+app.$mount('body')
+
 ```
